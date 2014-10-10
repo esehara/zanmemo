@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
   <title>Zanmemo</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -8,7 +8,11 @@
 </head>
 <body>
   <% if user_signed_in? %>
-  <p>Hello! <%= current_user.trace_id %></p>
+  <p>Hello!
+    <a href="/users/<%= current_user.trace_id %>">
+      <%= current_user.trace_id %>
+    </a>
+  </p>
   <%= link_to "Sign out", destroy_user_session_path %>
 
   <% else %>
@@ -16,7 +20,8 @@
   <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %>
     
   <% end %>
-<%= yield %>
+
+  <%= yield %>
 
 </body>
 </html>
