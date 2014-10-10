@@ -1,3 +1,7 @@
 <h1>
   <%= @user.trace_id %> :: Zanmemo
 </h1>
+
+<% @user.memos.each do |memo| %>
+<p><%= memo.content %></p>
+<% end %>
