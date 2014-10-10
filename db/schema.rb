@@ -14,9 +14,9 @@
 ActiveRecord::Schema.define(version: 20141010092756) do
 
   create_table "users", force: true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "trace_id"
+    t.string   "provider",   null: false
+    t.string   "uid",        null: false
+    t.string   "trace_id",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
