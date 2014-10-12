@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010143617) do
+ActiveRecord::Schema.define(version: 20141012135032) do
 
   create_table "memos", force: true do |t|
-    t.text     "content"
+    t.text     "content",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
