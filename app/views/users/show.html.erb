@@ -1,17 +1,17 @@
-<h1>
-  <%= @user.trace_id %> :: Zanmemo
-</h1>
+<h4>
+  by <%= @user.trace_id %>
+</h4>
 <% if user_signed_in? %>
 <%= form_for(@memo, class: 'form-horizontal', role:'form') do |f| %>
-<%= f.label :content %>
-<%= f.text_area :content %>
+<%= f.text_area :content, class: 'memo' %>
+<br>
 <%= f.submit "Memo!!", class: 'btn btn-default', data: {disable_with: '作成中'} %>
 <% end %>
 <% end %>
 
 <% @user.memos.each do |memo| %>
 <div>
-  <a href="/memo/<%= memo.trace_id %>">■</a>
-  <%= memo.content %>
+  <h4><a href="/memo/<%= memo.trace_id %>">■</a></h4>
+  <pre><%= memo.content %></pre>
 </div>
 <% end %>
