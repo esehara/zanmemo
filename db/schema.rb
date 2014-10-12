@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141012135353) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "memos", force: true do |t|
     t.text     "content",    null: false
     t.datetime "created_at"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20141012135353) do
     t.string   "trace_id",   null: false
   end
 
-  add_index "memos", ["user_id"], name: "index_memos_on_user_id"
+  add_index "memos", ["user_id"], name: "index_memos_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "provider",   null: false
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 20141012135353) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
-  add_index "users", ["trace_id"], name: "index_users_on_trace_id", unique: true
+  add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
+  add_index "users", ["trace_id"], name: "index_users_on_trace_id", unique: true, using: :btree
 
 end
