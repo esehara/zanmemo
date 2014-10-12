@@ -1,6 +1,13 @@
 <h1>
   <%= @user.trace_id %> :: Zanmemo
 </h1>
+<% if user_signed_in? %>
+<%= form_for(@memo, class: 'form-horizontal', role:'form') do |f| %>
+<%= f.label :content %>
+<%= f.text_area :content %>
+<%= f.submit "Memo!!", class: 'btn btn-default', data: {disable_with: '作成中'} %>
+<% end %>
+<% end %>
 
 <% @user.memos.each do |memo| %>
 <div>
