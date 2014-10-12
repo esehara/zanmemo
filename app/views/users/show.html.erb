@@ -3,8 +3,8 @@
 </h1>
 
 <% @user.memos.each do |memo| %>
-<p>
+<div>
+  <a href="/memo/<%= memo.trace_id %>">■</a>
   <%= memo.content %>
-</p>
-
+</div>
 <% end %>

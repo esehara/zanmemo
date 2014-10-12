@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   get 'users/:trace_id' => "users#show"
-
+  get 'memo/:trace_id' => "memo#show"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
