@@ -1,0 +1,7 @@
+<div>
+  <%= @memo.content %>
+</div>
+
+<div>
+  by <a href="/users/<%= @memo.user.trace_id %>"><%= @memo.user.trace_id %> </a>
+</div>

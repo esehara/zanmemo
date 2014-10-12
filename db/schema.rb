@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010143617) do
+ActiveRecord::Schema.define(version: 20141012135353) do
 
   create_table "memos", force: true do |t|
-    t.text     "content"
+    t.text     "content",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "trace_id",   null: false
   end
 
   add_index "memos", ["user_id"], name: "index_memos_on_user_id"
