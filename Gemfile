@@ -5,13 +5,13 @@ gem 'therubyracer'
 
 gem 'devise'
 gem 'omniauth-twitter'
-
 gem 'qiita-markdown'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-# Use SCSS for stylesheets
+gem 'pg'
+#Use SCSS for stylesheets
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
