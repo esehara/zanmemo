@@ -9,20 +9,26 @@
   <body>
     <div class="container">
       <div class="header">
-	<h1>Zanmemo</h1>
-	<% if user_signed_in? %>
-	<p>Hello!
-	  <a href="/users/<%= current_user.trace_id %>">
-	    <%= current_user.trace_id %>
-	  </a>
-	</p>
-	<%= link_to "Sign out", destroy_user_session_path %>
-	<% else %>
-	<%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %>
-	<% end %>
+	<ul class="nav nav-pills pull-right">
+	  <li>
+	  <% if user_signed_in? %>
+	    <a href="/users/<%= current_user.trace_id %>">
+	      <%= current_user.trace_id %>
+	    </a>
+	  </li>
+	  
+	  <li>
+	    <%= link_to "Sign out", destroy_user_session_path %>
+	    <% else %>
+	    <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %>
+	    <% end %>
+	  </li>
+	  </ul>
+	<h3 class="text-muted">Zanmemo</h3>
       </div>
-    </div>
-  <%= yield %>
 
-</body>
+      <%= yield %>
+
+    </div>
+  </body>
 </html>
