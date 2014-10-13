@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.1.2'
 
+# for heroku
+gem 'rails_12factor', :group => :production
+
 gem 'execjs'
 gem 'therubyracer'
 
