@@ -11,7 +11,9 @@ class Memo < ActiveRecord::Base
   belongs_to :user
 
   def parse
-    @markdown = RedCarpet::Markdown::Processor.new(Redcarpet::Render::HTML)
+    render_config = Redcarpet::Render::HTML.new(:filter_html => true,
+                                                :hard_wrap => true)
+    @markdown = Redcarpet::Markdown.new(render_config)
   end
 
   def render
