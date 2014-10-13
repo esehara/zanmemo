@@ -1,4 +1,4 @@
-require 'qiita-markdown'
+require 'redcarpet'
 
 class Memo < ActiveRecord::Base
   validates :content, length: {:maximum => 1200}
@@ -11,13 +11,11 @@ class Memo < ActiveRecord::Base
   belongs_to :user
 
   def parse
-    processer = Qiita::Markdown::Processor.new
-    @markdown = processer.call(self.content)
-    return self
+    @markdown = RedCarpet::Markdown::Processor.new(Redcarpet::Render::HTML)
   end
 
   def render
     parse
-    return @markdown[:output]
+    return @markdown.render(self.content)
   end  
 end
