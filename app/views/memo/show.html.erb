@@ -2,6 +2,9 @@
   <%= raw @memo.render %>
 </div>
 
-<div>
-  by <a href="/users/<%= @memo.user.trace_id %>"><%= @memo.user.trace_id %> </a>
+<div id="memo-detail">
+  <ul>
+    <li>by <a href="/users/<%= @memo.user.trace_id %>"><%= @memo.user.trace_id %> </a></li>
+    <li>at :: <%= @memo.updated_at %></li>
+  </ul>
 </div>

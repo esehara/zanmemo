@@ -3,6 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 textarea.memo {
-    width: 100%;
-    height: 150px;
+  width: 100%;
+  height: 150px;
+}
+
+#memo-detail{
+
+  ul {
+    padding: 0px;
+  }
+
+  li {
+    list-style-type: none;
+  }
 }
