@@ -1,7 +1,7 @@
 require 'redcarpet'
 
 class Memo < ActiveRecord::Base
-  validates :content, length: {:maximum => 1200}
+  validates :content, length: {:maximum => 3400}
 
   before_save do |memo|
     trace_id = Digest::SHA1.hexdigest(Time.now.to_s)
