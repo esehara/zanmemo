@@ -44,6 +44,13 @@ class MemoController < ApplicationController
     end
   end
   
+  def delete
+    # TODO: ここもdryにして、:trace_idが入ってきたらインスタンス変数にバインドするべき
+    @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+    @memo.destroy!
+    redirect_to user_show_path(current_user.trace_id), notice: "無事削除されました"
+  end
+  
   def post_params
     params.require(:memo).permit(:content)
   end
