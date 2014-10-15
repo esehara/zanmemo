@@ -8,8 +8,9 @@ Rails.application.routes.draw do
     get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   end
 
-  get '/users/:trace_id' => "users#show"
+  get '/users/:trace_id' => "users#show", :as => :user_show
   post '/memo/create' => "memo#create", :as => :memos
+  delete '/memo/:trace_id/delete' => "memo#delete", :as => :memo_delete
   get '/memo/:trace_id' => "memo#show", :as => :memo
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

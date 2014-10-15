@@ -3,6 +3,11 @@
 </div>
 
 <div id="memo-detail">
+  <% if user_signed_in? %>
+    <% if current_user == @memo.user %>
+      <%= link_to "削除", memo_delete_path(@memo.trace_id), class: 'btn btn-info btn-lg btn-block', method: :delete, data: {:confirm => "本当に削除しますか?"} %>
+    <% end %>
+  <% end %>
   <ul>
     <li>by <a href="/users/<%= @memo.user.trace_id %>"><%= @memo.user.trace_id %> </a></li>
     <li>at :: <%= @memo.updated_at %></li>
