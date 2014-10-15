@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def set_add_title
     @add_title = "user :: #{@user.trace_id}"
   end
-
+  
   def show
     if user_signed_in?
       @memo = current_user.memos.build
