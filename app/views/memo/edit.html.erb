@@ -1,0 +1,9 @@
+<%= form_for(
+    @memo,
+    url: memo_path(@memo.trace_id),
+    method: :patch,
+    class: 'form-horizontal',
+    role: 'form') do |f| %>
+<%= f.text_area :content, class: :memo %>
+<%= f.submit '更新', class: 'btn btn-default', data: {disable_with: '更新中'} %>
+<% end %>
