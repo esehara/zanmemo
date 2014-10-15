@@ -28,20 +28,24 @@ class MemoController < ApplicationController
     end
   end
 
+  def edit
+    @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+  end
+
+  def update
+    @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+    if @memo.update(post_params)
+      redirect_to memo_path(@memo.trace_id), notice: "更新しました"
+    else
+      render :edit
+    end
+  end
+  
   def delete
     # TODO: ここもdryにして、:trace_idが入ってきたらインスタンス変数にバインドするべき
-    @memo = Memo.find_by!(trace_id: params[:trace_id])
-    if user_signed_in?
-      if current_user == @memo.user
-        @memo.destroy!
-        redirect_to user_show_path(current_user.trace_id), notice: "無事削除されました"
-      else
-        raise redirect_to root_path, alert: "貴方のメモではありません"
-      end
-    else
-      # TODO: beforeの奴を使ってdryにしなおす
-      raise redirect_to root_path, alert: "ログインしてください"
-    end
+    @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+    @memo.destroy!
+    redirect_to user_show_path(current_user.trace_id), notice: "無事削除されました"
   end
   
   def post_params

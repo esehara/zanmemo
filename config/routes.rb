@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   get '/users/:trace_id' => "users#show", :as => :user_show
   post '/memo/create' => "memo#create", :as => :memos
   delete '/memo/:trace_id/delete' => "memo#delete", :as => :memo_delete
+  get '/memo/:trace_id/edit' => 'memo#edit', :as => :memo_edit
   get '/memo/:trace_id' => "memo#show", :as => :memo
+  patch '/memo/:trace_id' => "memo#update"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
