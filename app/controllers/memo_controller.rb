@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class MemoController < ApplicationController
-
+  
   def set_memo_title
     title = @memo.content.split("\n")[0]
     if title.length > 40
@@ -24,12 +24,17 @@ class MemoController < ApplicationController
       @memo.save
       redirect_to "/users/#{current_user.trace_id}"
     else
-      raise redirect_to root_path, alert: "ログインしてください"
+      redirect_to root_path, alert: "ログインしてください"
     end
   end
 
   def edit
-    @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+    if user_signed_in?
+      check_authenticate
+      @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+    else
+      redirect_to root_path, alert: "ログインしてください"
+    end
   end
 
   def update
