@@ -107,5 +107,22 @@ RSpec.describe MemoController, :type => :controller do
         expect(response.status).to eq(401)
       end
     end
+
+    context 'そのメモの作成者が更新しようとした場合' do
+      before do
+        @memo = create :memo
+        @attribute = attributes_for(:memo)
+        sign_in @memo.user
+      end
+
+      it '更新元と更新後の文章が違うことを確認' do 
+        expect(@memo.content).not_to eq(@attribute[:content])
+      end
+      
+      it 'メモの内容が更新されている' do
+        patch :update, :trace_id => @memo.trace_id, :memo => @attribute
+        expect(@memo.reload.content).to eq(@attribute[:content])
+      end
+    end
   end
 end
