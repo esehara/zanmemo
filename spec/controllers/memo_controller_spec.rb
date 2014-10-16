@@ -152,6 +152,7 @@ RSpec.describe MemoController, :type => :controller do
     end
 
     context 'メモの作成者と同じユーザーがdeleteしようとしたとき' do
+      
     end
   end
 end
