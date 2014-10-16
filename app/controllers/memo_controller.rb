@@ -39,12 +39,21 @@ class MemoController < ApplicationController
     end
   end
 
-  def update
+  def valid_update
     @memo = current_user.memos.find_by(trace_id: params[:trace_id])
     if @memo.update(post_params)
       redirect_to memo_path(@memo.trace_id), notice: "更新しました"
     else
       render :edit
+    end  
+  end
+  
+  def update
+
+    if user_signed_in?
+      valid_update
+    else
+      render :nothing => true, :status => :unauthorized
     end
   end
   

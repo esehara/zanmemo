@@ -69,6 +69,30 @@ RSpec.describe MemoController, :type => :controller do
         expect(response).to redirect_to(root_path)
       end
     end
-    
+
+    context 'メモの作成者が編集ページを開くとき' do
+      before do
+        memo = create :memo
+        sign_in memo.user
+        get :edit, :trace_id => memo.trace_id
+      end
+
+      it '200 response OKが帰ってくる' do
+        expect(response.status).to eq(200)
+      end
+    end
+  end
+
+  describe "PUT memo#update" do
+    context 'ユーザーがログインしていないときにrequireする' do
+      before do
+        memo = create :memo
+        patch :update, :trace_id => memo.trace_id
+      end
+
+      it '401 Status Errorが帰ってくる' do
+        expect(response.status).to eq(401)
+      end
+    end
   end
 end
