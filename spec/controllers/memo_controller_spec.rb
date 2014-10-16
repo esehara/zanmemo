@@ -125,4 +125,23 @@ RSpec.describe MemoController, :type => :controller do
       end
     end
   end
+
+  describe 'DELETE memo#delete' do
+    context 'ユーザーがログインしていないとき' do
+      before do
+        memo = create :memo
+        delete :delete, :trace_id => memo.trace_id
+      end
+
+      it '401 Status Error が返ってくる' do
+        expect(response.status).to eq(401)
+      end
+    end
+
+    context '違うユーザーがdeleteしようとしたとき' do
+    end
+
+    context 'メモの作成者と同じユーザーがdeleteしようとしたとき' do
+    end
+  end
 end
