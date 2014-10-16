@@ -94,5 +94,18 @@ RSpec.describe MemoController, :type => :controller do
         expect(response.status).to eq(401)
       end
     end
+
+    context '違うユーザーがpatchしようとしたとき' do
+      before do
+        memo = create :memo
+        user = create :user
+        sign_in user
+        patch :update, :trace_id => memo.trace_id, :memo => attributes_for(:memo)
+      end
+
+      it '401 Status Errorが返ってくる' do
+        expect(response.status).to eq(401)
+      end
+    end
   end
 end
