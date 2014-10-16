@@ -63,6 +63,7 @@ class MemoController < ApplicationController
       @memo.destroy!
       redirect_to user_show_path(current_user.trace_id), notice: "無事削除されました" 
     end
+    return render :nothing => true, :status => :unauthorized
  end
   
   def post_params

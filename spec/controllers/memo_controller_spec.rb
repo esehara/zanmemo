@@ -139,6 +139,16 @@ RSpec.describe MemoController, :type => :controller do
     end
 
     context '違うユーザーがdeleteしようとしたとき' do
+      before do
+        memo = create :memo
+        user = create :user
+        sign_in user
+        patch :update, :trace_id => memo.trace_id, :memo => attributes_for(:memo)
+      end
+
+      it '401 Status Errorが返ってくる' do
+        expect(response.status).to eq(401)
+      end
     end
 
     context 'メモの作成者と同じユーザーがdeleteしようとしたとき' do
