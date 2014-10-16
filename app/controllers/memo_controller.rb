@@ -30,8 +30,10 @@ class MemoController < ApplicationController
 
   def edit
     if user_signed_in?
-      check_authenticate
       @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+      if !@memo
+        redirect_to root_path, alert: "違うユーザーのメモは編集できません"
+      end
     else
       redirect_to root_path, alert: "ログインしてください"
     end
