@@ -143,7 +143,7 @@ RSpec.describe MemoController, :type => :controller do
         memo = create :memo
         user = create :user
         sign_in user
-        patch :update, :trace_id => memo.trace_id, :memo => attributes_for(:memo)
+        delete :delete, :trace_id => memo.trace_id
       end
 
       it '401 Status Errorが返ってくる' do
@@ -152,7 +152,16 @@ RSpec.describe MemoController, :type => :controller do
     end
 
     context 'メモの作成者と同じユーザーがdeleteしようとしたとき' do
-      
+      before do
+        memo = create :memo
+        @user = memo.user
+        sign_in @user
+        delete :delete, :trace_id => memo.trace_id
+      end
+
+      it 'UserのPageにリダイレクトする' do
+        expect(response.status).to redirect_to(user_show_path(:trace_id => @user.trace_id))
+      end
     end
   end
 end

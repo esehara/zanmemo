@@ -62,7 +62,7 @@ class MemoController < ApplicationController
       @memo = current_user.memos.find_by(trace_id: params[:trace_id])
       if @memo
         @memo.destroy!
-        redirect_to user_show_path(current_user.trace_id), notice: "無事削除されました" 
+        return redirect_to user_show_path(current_user.trace_id), notice: "無事削除されました" 
       end
     end
     return render :nothing => true, :status => :unauthorized
