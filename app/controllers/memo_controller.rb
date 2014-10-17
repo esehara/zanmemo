@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class MemoController < ApplicationController
-
+  
   def set_memo_title
     title = @memo.content.split("\n")[0]
     if title.length > 40
@@ -10,13 +10,16 @@ class MemoController < ApplicationController
   end
   
   def show
-    @memo = Memo.find_by!(trace_id: params[:trace_id])
-    set_memo_title
-    respond_to do |format|
-      format.html
-      format.json
+    @memo = Memo.find_by(trace_id: params[:trace_id])
+    if @memo
+      set_memo_title
+      return respond_to do |format|
+        format.html
+        format.json
+      end
     end
-  end
+    return render :nothing => true, :status => :not_found
+ end
 
   def create
     if user_signed_in?
@@ -24,29 +27,49 @@ class MemoController < ApplicationController
       @memo.save
       redirect_to "/users/#{current_user.trace_id}"
     else
-      raise redirect_to root_path, alert: "ログインしてください"
+      redirect_to root_path, alert: "ログインしてください"
     end
   end
 
   def edit
-    @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+    if user_signed_in?
+      @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+      if !@memo
+        redirect_to root_path, alert: "違うユーザーのメモは編集できません"
+      end
+    else
+      redirect_to root_path, alert: "ログインしてください"
+    end
   end
 
-  def update
-    @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+  def valid_update
     if @memo.update(post_params)
       redirect_to memo_path(@memo.trace_id), notice: "更新しました"
     else
       render :edit
+    end  
+  end
+  
+  def update
+    if user_signed_in?
+      @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+      if @memo
+        return valid_update
+      end
     end
+    return render :nothing => true, :status => :unauthorized
   end
   
   def delete
-    # TODO: ここもdryにして、:trace_idが入ってきたらインスタンス変数にバインドするべき
-    @memo = current_user.memos.find_by(trace_id: params[:trace_id])
-    @memo.destroy!
-    redirect_to user_show_path(current_user.trace_id), notice: "無事削除されました"
-  end
+    if user_signed_in? 
+      @memo = current_user.memos.find_by(trace_id: params[:trace_id])
+      if @memo
+        @memo.destroy!
+        return redirect_to user_show_path(current_user.trace_id), notice: "無事削除されました" 
+      end
+    end
+    return render :nothing => true, :status => :unauthorized
+ end
   
   def post_params
     params.require(:memo).permit(:content)

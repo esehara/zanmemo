@@ -48,3 +48,13 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+
+
+# --------------------------------------------
+# for development and test
+# --------------------------------------------
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
