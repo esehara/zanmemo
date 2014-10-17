@@ -155,12 +155,21 @@ RSpec.describe MemoController, :type => :controller do
       before do
         memo = create :memo
         @user = memo.user
+        @del_memo_id = memo.trace_id
         sign_in @user
         delete :delete, :trace_id => memo.trace_id
       end
 
       it 'UserのPageにリダイレクトする' do
         expect(response.status).to redirect_to(user_show_path(:trace_id => @user.trace_id))
+      end
+
+      it 'Memoのモデルが消去されている' do
+        expect(@user.reload.memos.length).to eq(0)
+      end
+
+      it '既存のメモにはアクセス出来なくなっている' do
+        get :show, :trace_id => @del_memo_id
       end
     end
   end

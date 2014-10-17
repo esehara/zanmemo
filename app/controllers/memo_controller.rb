@@ -10,13 +10,16 @@ class MemoController < ApplicationController
   end
   
   def show
-    @memo = Memo.find_by!(trace_id: params[:trace_id])
-    set_memo_title
-    respond_to do |format|
-      format.html
-      format.json
+    @memo = Memo.find_by(trace_id: params[:trace_id])
+    if @memo
+      set_memo_title
+      return respond_to do |format|
+        format.html
+        format.json
+      end
     end
-  end
+    return render :nothing => true, :status => :not_found
+ end
 
   def create
     if user_signed_in?
