@@ -22,4 +22,12 @@ class Memo < ActiveRecord::Base
     parse
     return @markdown.render(self.content)
   end  
+
+  def title
+    title = content.split("\n")[0]
+    if title.length > 40
+      title = title.slice(0..60) + "..."
+    end
+    return title
+  end  
 end
