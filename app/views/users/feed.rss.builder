@@ -10,7 +10,7 @@ xml.rss("version" => '2.0',
     xml.item do
       xml.title @memo.title
       xml.guid "zanmemo.herokuapp.com/users/#{@user.trace_id}"
-      xml.link "zanmemo.herokuapp.com/memo/#{@memo.created_at}"
+      xml.link "zanmemo.herokuapp.com/memo/#{@memo.trace_id}"
       xml.description @memo.render
       xml.pubDate @memo.created_at.strftime("%a, %d %b %Y %H:%M:%S %Z")
       xml.author @user.trace_id
