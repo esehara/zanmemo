@@ -5,7 +5,7 @@
 <%= form_for(@memo, class: 'form-horizontal', role:'form') do |f| %>
 <%= f.text_area :content, class: 'memo' %>
 <br>
-<%= f.submit "Memo!!", class: 'btn btn-default', data: {disable_with: '作成中'} %>
+<%= f.submit "Memo!!", class: 'btn btn-default', data: {disable_with: '作成中'}, id: "submit-memo" %>
 <% end %>
 <% end %>
  
