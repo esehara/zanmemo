@@ -2,8 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+debug_mode = false
 p = (st) ->
-  console.log(st)
+  if debug_mode
+    console.log(st)
 
 storagekey = "zanmemo-draft"
 save_target = () -> $("#content_memo")
@@ -20,7 +22,6 @@ cleardraft = () ->
     localStorage.setItem(storagekey, "")
   
 $ ->
-  debug_mode = true
   p("Start :: LocalStrage Load")
   save_target().val(draft())
 
