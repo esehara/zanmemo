@@ -2,13 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-debug_mode = false
+debug_mode = true
 p = (st) ->
   if debug_mode
     console.log(st)
 
 storagekey = "zanmemo-draft"
-save_target = () -> $("#content_memo")
+save_target = () -> $("#memo_content")
 
 draft = () ->
   localStorage.getItem(storagekey)
@@ -23,10 +23,11 @@ cleardraft = () ->
   
 $ ->
   p("Start :: LocalStrage Load")
-  save_target().val(draft())
 
+  save_target().val(draft())
+  
   save_interval = setInterval ->
-    savedraft($("#memo_content").val())
+    savedraft(save_target().val())
     p("Tick, Tick ... Save !!")
   , 500
 
