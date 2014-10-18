@@ -6,20 +6,23 @@ p = (st) ->
   console.log(st)
 
 storagekey = "zanmemo-draft"
+save_target = () -> $("#content_memo")
 
 draft = () ->
   localStorage.getItem(storagekey)
 
 savedraft = (st) ->
-  localStorage.setItem(storagekey, st)
+  if save_target().val()?
+    localStorage.setItem(storagekey, st)
 
 cleardraft = () ->
-  localStorage.setItem(storagekey, "")
+  if save_target().val()?
+    localStorage.setItem(storagekey, "")
   
 $ ->
   debug_mode = true
   p("Start :: LocalStrage Load")
-  $("#memo_content").val(draft())
+  save_target().val(draft())
 
   save_interval = setInterval ->
     savedraft($("#memo_content").val())
