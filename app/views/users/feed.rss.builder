@@ -3,7 +3,7 @@ xml.rss("version" => '2.0',
         "xmlns:dc" => 'http://purl.org/dc/elements/1.1/',
         "xmlns:atom" => 'http://www.w3.org/2005/Atom') do
   xml.channel do
-    xml.title "Zanmemo :: User :: Feed :: #{@user.trace_id}"
+    xml.title "Zanmemo :: #{@user.trace_id} :: Feed"
     xml.description "by #{@user.trace_id}"
     xml.language "ja-ja"
     xml.pubDate Time.now.strftime("%a, %d %b %Y %H:%M:%S %Z")
