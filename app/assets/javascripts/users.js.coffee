@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-debug_mode = true
+debug_mode = false
 p = (st) ->
   if debug_mode
     console.log(st)
