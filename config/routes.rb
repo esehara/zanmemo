@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   get '/users/:trace_id' => "users#show", :as => :user_show
+  get '/users/:trace_id/feed' => "users#feed", :format => "rss", :as => :user_feed
   post '/memo/create' => "memo#create", :as => :memos
   delete '/memo/:trace_id/delete' => "memo#delete", :as => :memo_delete
   get '/memo/:trace_id/edit' => 'memo#edit', :as => :memo_edit

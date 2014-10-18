@@ -1,6 +1,9 @@
 <h4>
   by <%= @user.trace_id %>
 </h4>
+</h4>
+  <a href="<%= user_feed_path(:trace_id => @user.trace_id) %>">RSS</a>
+</h4>
 <% if user_signed_in? %>
 <%= form_for(@memo, class: 'form-horizontal', role:'form') do |f| %>
 <%= f.text_area :content, class: 'memo' %>
