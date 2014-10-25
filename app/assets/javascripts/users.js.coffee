@@ -9,6 +9,7 @@ p = (st) ->
 
 storagekey = "zanmemo-draft"
 save_target = () -> $("#memo_content")
+preview_target = () -> $("#memo_content")
 
 draft = () ->
   localStorage.getItem(storagekey)
@@ -20,7 +21,24 @@ savedraft = (st) ->
 cleardraft = () ->
   if save_target().val()?
     localStorage.setItem(storagekey, "")
+
+previous_render_text = null
+
+render_markdown = () ->
+  raw_text = preview_target().val()
+
+  if !previous_render_text
+    previous_render_text = raw_text
+    return reflesh_markdown_preview(raw_text) 
   
+  if previous_render_text != raw_text 
+    reflesh_markdown_preview(raw_text)
+    
+reflesh_markdown_preview = (raw_text) ->
+  markdown_text = marked(raw_text)
+  $('#memo-preview').html(markdown_text)
+  
+    
 $ ->
   p("Start :: LocalStrage Load")
 
@@ -29,6 +47,11 @@ $ ->
   save_interval = setInterval ->
     savedraft(save_target().val())
     p("Tick, Tick ... Save !!")
+  , 500
+
+  render_interval = setInterval ->
+    render_markdown()
+    p("Markdown render ... boom boom !!")
   , 500
 
   $("#submit-memo").on "click", ->
