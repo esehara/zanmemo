@@ -2,11 +2,7 @@
 class MemoController < ApplicationController
   
   def set_memo_title
-    title = @memo.content.split("\n")[0]
-    if title.length > 40
-      title = title.slice(0..60) + "..."
-    end
-    @add_title = title
+    @add_title = @memo.title
   end
   
   def show

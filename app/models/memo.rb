@@ -25,9 +25,15 @@ class Memo < ActiveRecord::Base
 
   def title
     title = content.split("\n")[0]
+    
+    if !title
+      title = "(None)"
+    end
+
     if title.length > 40
       title = title.slice(0..60) + "..."
     end
+
     return title
   end  
 end
