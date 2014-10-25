@@ -25,14 +25,15 @@ cleardraft = () ->
 previous_render_text = null
 
 render_markdown = () ->
-  raw_text = preview_target().val()
+  if preview_target().val()?
+    raw_text = preview_target().val()
 
-  if !previous_render_text
-    previous_render_text = raw_text
-    return reflesh_markdown_preview(raw_text) 
+    if !previous_render_text
+      previous_render_text = raw_text
+      return reflesh_markdown_preview(raw_text) 
   
-  if previous_render_text != raw_text 
-    reflesh_markdown_preview(raw_text)
+    if previous_render_text != raw_text 
+      reflesh_markdown_preview(raw_text)
     
 reflesh_markdown_preview = (raw_text) ->
   markdown_text = marked(raw_text)
