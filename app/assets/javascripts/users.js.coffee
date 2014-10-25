@@ -32,13 +32,18 @@ render_markdown = () ->
       previous_render_text = raw_text
       return reflesh_markdown_preview(raw_text) 
   
-    if previous_render_text != raw_text 
-      reflesh_markdown_preview(raw_text)
+    if previous_render_text != raw_text
+     reflesh_markdown_preview(raw_text)
     
 reflesh_markdown_preview = (raw_text) ->
   markdown_text = marked(raw_text)
   $('#memo-preview').html(markdown_text)
-  
+  reflesh_preview_height()
+
+reflesh_preview_height = () ->
+  preview_height = $('#memo-preview').height()
+  if preview_height > preview_target().height()
+    preview_target().height(preview_height)
     
 $ ->
   p("Start :: LocalStrage Load")
