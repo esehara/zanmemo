@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.subtitle {
+  border-bottom: 1px dotted black;
+}
+
 .memo-create, .memo-edit {
     width: 100%;
     height: 150px;

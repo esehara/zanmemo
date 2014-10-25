@@ -9,7 +9,10 @@
     <%= f.text_area :content, class: "memo-edit" %>
     <%= f.submit '更新', class: 'btn btn-default', data: {disable_with: '更新中'} %>
   </div>
-  <div class="col-xs-6" id="memo-preview">
+  <div class="col-xs-6">
+    <h4 class="subtitle">Markdown Preview</h4>
+    <div id="memo-preview">  
+    </div>
   </div>
 </div>
 <% end %>
