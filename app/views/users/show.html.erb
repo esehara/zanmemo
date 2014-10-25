@@ -21,9 +21,7 @@
 <br>
 <% end %>
  
-<hr>
-<h3>New Memo</h3>
-<hr>
+<h3 class="subtitle">New Memo</h3>
 
 <% @user.memos[0..0].each do |memo| %>
 <h4><a href="/memo/<%= memo.trace_id %>">■</a></h4>
@@ -31,8 +29,8 @@
 
 <% end %>
 <hr>
-<h3>Random Pickup</h3>
-<hr>
+<h3 class="subtitle">Random Pickup</h3>
+
 <% @user.memos.shuffle[0..5].each do |memo| %>
 <div>
   <h4><a href="/memo/<%= memo.trace_id %>">■</a></h4>
