@@ -5,8 +5,15 @@
   <a href="<%= user_feed_path(:trace_id => @user.trace_id) %>">RSS</a>
 </h4>
 <% if user_signed_in? %>
-<%= form_for(@memo, class: 'form-horizontal', role:'form') do |f| %>
-<%= f.text_area :content, class: 'memo' %>
+<div class="row">
+  <div class="col-xs-6">
+    <%= form_for(@memo, class: 'form-horizontal', role:'form') do |f| %>
+     <%= f.text_area :content, class: 'memo' %>
+  </div>
+  <div class="col-xs-6" id="memo-preview">
+    
+  </div>
+</div>
 <br>
 <%= f.submit "Memo!!", class: 'btn btn-default', data: {disable_with: '作成中'}, id: "submit-memo" %>
 <% end %>
