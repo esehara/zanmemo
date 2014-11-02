@@ -14,8 +14,9 @@ preview_target = () -> $("#memo_content")
 draft = () ->
   localStorage.getItem(storagekey)
 
+post_now = false
 savedraft = (st) ->
-  if save_target().val()?
+  if save_target().val()? && !post_now
     localStorage.setItem(storagekey, st)
 
 cleardraft = () ->
@@ -61,5 +62,6 @@ $ ->
   , 500
 
   $("#submit-memo").on "click", ->
+    post_now = true
     clearInterval(save_interval)
     cleardraft()
