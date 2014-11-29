@@ -7,6 +7,7 @@
 <% if user_signed_in? %>
 <div class="row">
   <div class="col-xs-6">
+    <h4 class="subtitle">Editor</h4>
     <%= form_for(@memo, class: 'form-horizontal', role:'form') do |f| %>
     <%= f.text_area :content, class: 'memo-create' %>
     <%= f.submit "Memo!!", class: 'btn btn-default', data: {disable_with: '作成中'}, id: "submit-memo" %>
@@ -14,13 +15,13 @@
   </div>
   <div class="col-xs-6">
     <h4 class="subtitle">Markdown Preview</h4>
-    <div id="memo-preview">  
+    <div id="memo-preview">
     </div>
   </div>
 </div>
 <br>
 <% end %>
- 
+
 <h3 class="subtitle">New Memo</h3>
 
 <% @user.memos[0..0].each do |memo| %>

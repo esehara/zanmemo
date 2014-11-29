@@ -1,17 +1,18 @@
 <div class="row">
   <div class="col-xs-6">
+    <h4 class="subtitle">Editor</h4>
     <%= form_for(
-	@memo,
-	url: memo_path(@memo.trace_id),
-	method: :patch,
-	class: 'form-horizontal',
-	role: 'form') do |f| %>
+        @memo,
+        url: memo_path(@memo.trace_id),
+        method: :patch,
+        class: 'form-horizontal',
+        role: 'form') do |f| %>
     <%= f.text_area :content, class: "memo-edit" %>
     <%= f.submit '更新', class: 'btn btn-default', data: {disable_with: '更新中'} %>
   </div>
   <div class="col-xs-6">
     <h4 class="subtitle">Markdown Preview</h4>
-    <div id="memo-preview">  
+    <div id="memo-preview">
     </div>
   </div>
 </div>
