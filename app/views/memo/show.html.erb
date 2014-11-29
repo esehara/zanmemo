@@ -3,14 +3,18 @@
 </div>
 
 <div id="memo-detail">
-  <% if user_signed_in? %>
-    <% if current_user == @memo.user %>
-    <%= link_to "編集", memo_edit_path(@memo.trace_id), class: 'btn btn-info btn-lg btn-block' %>
-    <%= link_to "削除", memo_delete_path(@memo.trace_id), class: 'btn btn-danger btn-lg btn-block', method: :delete, data: {:confirm => "本当に削除しますか?"} %>
-    <% end %>
-  <% end %>
   <ul>
+    <li>
+      <% if user_signed_in? && current_user == @memo.user %>
+      <%= link_to "編集", memo_edit_path(@memo.trace_id), class: 'btn btn-info btn-lg' %>
+      <% end %>
+    </li>
     <li>by <a href="/users/<%= @memo.user.trace_id %>"><%= @memo.user.trace_id %> </a></li>
     <li>at :: <%= @memo.updated_at %></li>
   </ul>
+  <% if user_signed_in? && current_user == @memo.user %>
+  <div>
+    <%= link_to "削除", memo_delete_path(@memo.trace_id), class: 'btn btn-danger btn-sm', method: :delete, data: {:confirm => "本当に削除しますか?"} %>
+  </div>
+  <% end %>
 </div>
