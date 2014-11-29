@@ -1,7 +1,7 @@
 require 'redcarpet'
 
 class Memo < ActiveRecord::Base
-  validates :content, length: {:maximum => 3400}
+  validates :content, length: {:maximum => 3400, :minimum => 1}
 
   before_save do |memo|
     if memo.trace_id == nil
@@ -9,7 +9,11 @@ class Memo < ActiveRecord::Base
       memo.trace_id = trace_id.to_s
     end
   end
-  
+
+  before_validation do |memo|
+    memo.content.strip!
+  end
+
   belongs_to :user
 
   def parse
